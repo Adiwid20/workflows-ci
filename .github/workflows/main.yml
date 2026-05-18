@@ -42,14 +42,13 @@ jobs:
           echo "=== Debug: struktur mlruns ==="
           find mlruns -maxdepth 4 -type d | head -30
           echo "=============================="
-          RUN_ID=$(ls -t mlruns/0/ 2>/dev/null | grep -v meta | head -n 1 || \
-                   find mlruns -mindepth 3 -maxdepth 3 -type d | grep -v meta | sort -r | head -n 1 | xargs basename)
-          echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
           MODEL_PATH=$(find mlruns -type d -path "*/artifacts/model" | head -n 1)
           echo "MODEL_PATH=$MODEL_PATH" >> $GITHUB_ENV
-          echo "RUN_ID: $RUN_ID"
           echo "MODEL_PATH: $MODEL_PATH"
           ls -la "$MODEL_PATH" || { echo "ERROR: model tidak ditemukan!"; exit 1; }
+          RUN_ID=$(echo "$MODEL_PATH" | cut -d'/' -f3)
+          echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
+          echo "RUN_ID: $RUN_ID"
 
       - name: Install Python dependencies
         run: |
