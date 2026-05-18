@@ -1,1 +1,1 @@
-https://hub.docker.com/repository/docker/widdd/cc/general
+https://hub.docker.com/repository/docker/widdd/loan-approval-model/general
