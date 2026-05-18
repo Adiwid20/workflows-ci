@@ -1,0 +1,12 @@
+name: Loan-Approval
+
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      n_estimators: {type: int, default: 20}
+      max_depth: {type: int, default: 10}
+      dataset : {type: string, default: "loan_data_preprocessed.csv"}
+    command: "python modelling.py"
