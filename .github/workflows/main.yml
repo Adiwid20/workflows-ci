@@ -66,7 +66,8 @@ jobs:
           mlflow models build-docker \
             -m "${{ env.MODEL_PATH }}" \
             -n "${{ secrets.DOCKER_HUB_USERNAME }}/loan-approval-model" \
-            --install-mlflow
+            --install-mlflow \
+            --env-manager=local
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
