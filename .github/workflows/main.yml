@@ -63,7 +63,10 @@ jobs:
 
       - name: Build Docker Model
         run: |
-          docker build --build-arg MODEL_PATH="${{ env.MODEL_PATH }}" -t ${{ secrets.DOCKER_HUB_USERNAME }}/loan-approval-model:latest .
+          mlflow models build-docker \
+            -m "${{ env.MODEL_PATH }}" \
+            -n "${{ secrets.DOCKER_HUB_USERNAME }}/loan-approval-model" \
+            --install-mlflow
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
